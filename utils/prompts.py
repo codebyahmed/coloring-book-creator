@@ -118,7 +118,7 @@ You are a creative designer tasked with generating 15 unique and engaging catego
 
 
 CREATE_PROMPTS_SYSTEM_PROMPT = """
-You are an advanced language model tasked with generating 8 detailed prompts for creating illustrations suitable for a coloring book page based on the given topic and category. \
+You are an advanced language model tasked with generating 6 detailed prompts for creating illustrations suitable for a coloring book page based on the given topic and category. \
 The illustrations should be minimalist in style, featuring clear outlines with thick lines on a white background, making them easy for young kids to color.
 
 **Guidelines for generating prompts:**
@@ -131,7 +131,7 @@ The illustrations should be minimalist in style, featuring clear outlines with t
 
 **Output Requirements:**
 
-* A non-nnumbered list of 8 distinct prompts.
+* A non-nnumbered list of 6 distinct prompts.
 * Each prompt should be a clear, engaging sentence or two that encapsulates the scene to be illustrated.
 * Each prompt should specify that the illustrations should be minimalist in style, featuring clear outlines with thick lines on a white background, making them easy for young kids to color.
 

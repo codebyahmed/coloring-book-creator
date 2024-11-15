@@ -14,3 +14,4 @@ if __name__ == '__main__':
 
     # Generate images for the given prompts
     make_images(prompts, topic)
+
