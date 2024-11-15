@@ -71,23 +71,24 @@ def make_prompts(topic: str) -> list[str]:
         thread.join()
 
     # Save the generated prompts to a csv file
+    prompts_list = list(prompts.queue)
     with open(f"books/{topic}/prompts.csv", "w") as f:
         f.write("No.\tPrompt\n")
         i = 1
         while not prompts.empty():
             prompt = prompts.get()
-            f.write(f"{i}\t{topic}: {prompt}\n") # Add topic before each prompt
+            f.write(f"{i}\t{prompt}\n") # Add topic before each prompt
             i += 1
     
     print(f"\nPrompts saved to ./books/{topic}/prompts.csv")
-    return prompts
+    return prompts_list
 
 
 ################################################################ PROMPTS ################################################################
 
 
 CREATE_CATEGORIES_SYSTEM_PROMPT = """
-You are a creative designer tasked with generating 14 unique and engaging category ideas for a coloring book based on the given topic.
+You are a creative designer tasked with generating 15 unique and engaging category ideas for a coloring book based on the given topic.
 
 ### Guidelines for Generating Categories:
 
@@ -95,11 +96,12 @@ You are a creative designer tasked with generating 14 unique and engaging catego
 2. **Varied Scenes:** Ensure each category provides multiple potential scene or pose variations.
 3. **Aspect Capturing:** Focus on capturing different aspects, emotions, or contexts related to the topic.
 4. **Visual Appeal:** Categories should be visually interesting and appeal to various age groups.
-5. **Simplicity:** Ensure the categories are easy to understand and can be easily depicted by image generation models.
+5. **Text Instructions:** If text is present in the image, make sure text is outlined to allow for easy coloring.
+5. **Simplicity:** Ensure the categories are easy to understand, with limited number of objects and characters to be easily depicted by image generation models.
 
 ### Output Requirements:
 
-- **Numbered List:** Provide a non-numbered list of 14 distinct categories.
+- **Numbered List:** Provide a non-numbered list of 15 distinct categories.
 - **Descriptive Phrases:** Each category should be a descriptive, evocative phrase.
 - **Showcase Versatility:** Categories should showcase the topic's versatility.
 - **Avoid Repetition:** Avoid repetitive or overly similar concepts.
@@ -116,7 +118,7 @@ You are a creative designer tasked with generating 14 unique and engaging catego
 
 
 CREATE_PROMPTS_SYSTEM_PROMPT = """
-You are an advanced language model tasked with generating 5 detailed prompts for creating illustrations suitable for a coloring book page based on the given topic and category. \
+You are an advanced language model tasked with generating 8 detailed prompts for creating illustrations suitable for a coloring book page based on the given topic and category. \
 The illustrations should be minimalist in style, featuring clear outlines with thick lines on a white background, making them easy for young kids to color.
 
 **Guidelines for generating prompts:**
@@ -129,20 +131,14 @@ The illustrations should be minimalist in style, featuring clear outlines with t
 
 **Output Requirements:**
 
-* A non-nnumbered list of 5 distinct prompts.
+* A non-nnumbered list of 8 distinct prompts.
 * Each prompt should be a clear, engaging sentence or two that encapsulates the scene to be illustrated.
 * Each prompt should specify that the illustrations should be minimalist in style, featuring clear outlines with thick lines on a white background, making them easy for young kids to color.
 
 **Important:** Be imaginative, concise, and ensure each prompt is easy to visualize for creating a coloring page that kids will enjoy.
 
 **Example Category: Animals**
-1. A cheerful lion with a fluffy golden mane, standing proudly on a small rock in a simple jungle setting filled with green leaves and soft sunlight filtering through the trees. \
-The lion's expression should be friendly and inviting, with big, bright eyes and a wide smile. The illustration should be minimalist in style, featuring clear, bold outlines with \
-thick lines on a clean white background, making it easy for young kids to color. The jungle elements should be simplified, allowing for easy coloring without intricate details.
-2. A playful dolphin leaping gracefully out of the sparkling blue water, with a few stylized waves and bubbles surrounding it. The dolphin should be depicted mid-jump, with a \
-joyful expression and a shiny, smooth body. The background should include a bright sun and a few fluffy clouds, adding to the cheerful atmosphere. The illustration should be \
-minimalist in style, featuring clear, bold outlines with thick lines on a clean white background, making it easy for young kids to color. The water elements should be simplified to enhance the coloring experience.
-3. A charming group of three little ducks swimming happily in a serene pond, surrounded by tall green reeds and a few floating lily pads. Each duck should have a different \
-expression and pose, showcasing their playful nature. The pond should have gentle ripples to indicate movement, and the background should include a soft blue sky with a few fluffy clouds. \
-The illustration should be minimalist in style, featuring clear, bold outlines with thick lines on a clean white background, making it easy for young kids to color. The natural elements should be simplified to facilitate an enjoyable coloring experience.
+1. Cheerful Lion on a Rock: A friendly lion standing on a rock with a big smile, surrounded by simple jungle leaves. Minimalist details outline coloring pages on a white background. Ensure the image is drawn as a clear outline with thick lines, making it easy for young kids to color.
+2. Playful Dolphin Jumping: A happy dolphin jumping out of the water with a few waves and bubbles. Sun and clouds in the background. Minimalist details outline coloring pages on a white background. Ensure the image is drawn as a clear outline with thick lines, making it easy for young kids to color.
+3. Three Ducks in a Pond: Three playful ducks swimming in a pond with reeds and lily pads around. Soft sky with clouds above. Minimalist details outline coloring pages on a white background. Ensure the image is drawn as a clear outline with thick lines, making it easy for young kids to color.
 """

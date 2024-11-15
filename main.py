@@ -1,5 +1,5 @@
 import os
-from utils import make_prompts
+from utils import make_prompts, make_images
 
 if __name__ == '__main__':
     topic = input("Please enter the topic name: ")
@@ -11,3 +11,6 @@ if __name__ == '__main__':
 
     # Generate prompts for the given topic
     prompts = make_prompts(topic)
+
+    # Generate images for the given prompts
+    make_images(prompts, topic)
