@@ -45,7 +45,7 @@ def make_images(prompts: list[str], topic: str) -> None:
         start_time = time.time()
         while not success:
             try:
-                image_bytes = query(prompt)
+                image_bytes = query(f"{topic} - {prompt}")
                 image = Image.open(io.BytesIO(image_bytes))
                 success = True
             except Exception as e:
