@@ -4,11 +4,12 @@ import requests
 import time
 from PIL import Image
 from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate
 load_dotenv()
 
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
+llm = ChatOpenAI(model="gpt-4o-mini") #ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 
 HF_TOKEN = os.getenv("HF_TOKEN")
 API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"
@@ -40,12 +41,13 @@ def make_images(prompts: list[str], topic: str) -> None:
     # Generate images for each prompt
     print("\nGenerating images for each prompt...")
     for i, prompt in enumerate(prompts):
+        prompt = topic + " - " + prompt
         print(f"{i+1}. {prompt}")
         success = False
         start_time = time.time()
         while not success:
             try:
-                image_bytes = query(f"{topic} - {prompt}")
+                image_bytes = query(prompt)
                 image = Image.open(io.BytesIO(image_bytes))
                 success = True
             except Exception as e:
@@ -68,6 +70,7 @@ def shorten_image_name(image_name: str) -> str:
         ("human", "Filename: {image_name}")
     ])
     success = False
+    start_time = time.time()
     while not success:
         try:
             prompt = template.invoke({
@@ -83,6 +86,11 @@ def shorten_image_name(image_name: str) -> str:
     shortened_name = shortened_name.strip()
     shortened_name = shortened_name.replace("\n", "")
     shortened_name = shortened_name.replace("\r", "")
+    if shortened_name.endswith("."):
+        shortened_name = shortened_name[:-1]
+    end_time = time.time()
+    duration = end_time - start_time
+    print(f"Time taken to name image: {duration:.2f} seconds")
     return shortened_name
 
 
@@ -99,5 +107,5 @@ Example:
 Original file name: "Tweety Bird: A nighttime scene featuring Tweety Bird flying playfully among large, puffy clouds, with a backdrop of a bright full moon and scattered stars. Minimalist details outline coloring pages on a white background. Ensure the image is drawn as a clear outline with thick lines, making it easy for young kids to color."
 Shortened file name: "Tweety Bird In A Starry Night Sky."
 
-Please generate the shortened file name according to the guidelines above.
+Your response should only be the shortened name of the image.
 """

@@ -96,7 +96,6 @@ You are a creative designer tasked with generating 15 unique and engaging catego
 2. **Varied Scenes:** Ensure each category provides multiple potential scene or pose variations.
 3. **Aspect Capturing:** Focus on capturing different aspects, emotions, or contexts related to the topic.
 4. **Visual Appeal:** Categories should be visually interesting and appeal to various age groups.
-5. **Text Instructions:** If text is present in the image, make sure text is outlined to allow for easy coloring.
 5. **Simplicity:** Ensure the categories are easy to understand, with limited number of objects and characters to be easily depicted by image generation models.
 
 ### Output Requirements:
@@ -118,7 +117,7 @@ You are a creative designer tasked with generating 15 unique and engaging catego
 
 
 CREATE_PROMPTS_SYSTEM_PROMPT = """
-You are an advanced language model tasked with generating 6 detailed prompts for creating illustrations suitable for a coloring book page based on the given topic and category. \
+You are an advanced language model tasked with generating 10 detailed prompts for creating illustrations suitable for a coloring book page based on the given topic and category. \
 The illustrations should be minimalist in style, featuring clear outlines with thick lines on a white background, making them easy for young kids to color.
 
 **Guidelines for generating prompts:**
@@ -126,13 +125,15 @@ The illustrations should be minimalist in style, featuring clear outlines with t
 1. Each prompt should be descriptive enough to convey the scene or concept clearly.
 2. Focus on simple shapes and forms that can be easily understood and colored by children.
 3. Ensure that the prompts encourage creativity and imagination while remaining straightforward.
-4. Provide a variety of scenes or concepts within the given category to showcase its diversity.
-5. The final illustrations should be engaging and visually appealing, suitable for young audiences.
+4. Ensure the prompts are easy to understand, with limited number of objects and characters to be easily depicted by image generation models.
+5. Provide a variety of scenes or concepts within the given category to showcase its diversity.
+6. The final illustrations should be engaging and visually appealing, suitable for young audiences.
 
 **Output Requirements:**
 
-* A non-nnumbered list of 6 distinct prompts.
+* A non-nnumbered list of 10 distinct prompts.
 * Each prompt should be a clear, engaging sentence or two that encapsulates the scene to be illustrated.
+* Each prompt should contain the topic name in the description for context.
 * Each prompt should specify that the illustrations should be minimalist in style, featuring clear outlines with thick lines on a white background, making them easy for young kids to color.
 
 **Important:** Be imaginative, concise, and ensure each prompt is easy to visualize for creating a coloring page that kids will enjoy.
