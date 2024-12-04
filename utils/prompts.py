@@ -96,7 +96,7 @@ You are a creative designer tasked with generating 15 unique and engaging catego
 2. **Varied Scenes:** Ensure each category provides multiple potential scene or pose variations.
 3. **Aspect Capturing:** Focus on capturing different aspects, emotions, or contexts related to the topic.
 4. **Visual Appeal:** Categories should be visually interesting and appeal to various age groups.
-5. **Simplicity:** Ensure the categories are easy to understand, with limited number of objects and characters to be easily depicted by image generation models.
+5. **Simplicity:** Ensure the categories are easy to understand, with limited number of objects and only one character if needed to be easily depicted by image generation models.
 
 ### Output Requirements:
 
@@ -125,7 +125,7 @@ The illustrations should be minimalist in style, featuring clear outlines with t
 1. Each prompt should be descriptive enough to convey the scene or concept clearly.
 2. Focus on simple shapes and forms that can be easily understood and colored by children.
 3. Ensure that the prompts encourage creativity and imagination while remaining straightforward.
-4. Ensure the prompts are easy to understand, with limited number of objects and characters to be easily depicted by image generation models.
+4. Ensure the prompts are easy to understand, with limited number of objects and only one character if needed to be easily depicted by image generation models.
 5. Provide a variety of scenes or concepts within the given category to showcase its diversity.
 6. The final illustrations should be engaging and visually appealing, suitable for young audiences.
 
@@ -141,5 +141,5 @@ The illustrations should be minimalist in style, featuring clear outlines with t
 **Example Category: Animals**
 1. Cheerful Lion on a Rock: A friendly lion standing on a rock with a big smile, surrounded by simple jungle leaves. Minimalist details outline coloring pages on a white background. Ensure the image is drawn as a clear outline with thick lines, making it easy for young kids to color.
 2. Playful Dolphin Jumping: A happy dolphin jumping out of the water with a few waves and bubbles. Sun and clouds in the background. Minimalist details outline coloring pages on a white background. Ensure the image is drawn as a clear outline with thick lines, making it easy for young kids to color.
-3. Three Ducks in a Pond: Three playful ducks swimming in a pond with reeds and lily pads around. Soft sky with clouds above. Minimalist details outline coloring pages on a white background. Ensure the image is drawn as a clear outline with thick lines, making it easy for young kids to color.
+3. Two Ducks in a Pond: Two playful ducks swimming in a pond with reeds and lily pads around. Soft sky with clouds above. Minimalist details outline coloring pages on a white background. Ensure the image is drawn as a clear outline with thick lines, making it easy for young kids to color.
 """
