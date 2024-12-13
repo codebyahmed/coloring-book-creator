@@ -2,18 +2,28 @@ import os
 import io
 import requests
 import time
+import pathlib
 from PIL import Image
 from dotenv import load_dotenv
+from upscale_ncnn_py import UPSCALE
 from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate
 load_dotenv()
 
+# Initialize the LLM model for renaming images
 llm = ChatOpenAI(model="gpt-4o-mini") #ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 
+# Load the Hugging Face API token for image generation
 HF_TOKEN = os.getenv("HF_TOKEN")
 API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"
 headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+
+# Initialize the UPSCALE object for upscaling
+param_path = "models/SPAN/spanx2_ch48.param"
+model_path = "models/SPAN/spanx2_ch48.bin"
+upscale = UPSCALE(gpuid=0, model=-1, scale=2)
+upscale._load(param_path=pathlib.Path(param_path), model_path=pathlib.Path(model_path), scale=2)
 
 
 def query(prompt: str) -> bytes:
@@ -31,7 +41,7 @@ def query(prompt: str) -> bytes:
 
 
 def make_images(prompts: list[str], topic: str) -> None:
-    """Generate images for the given prompts"""
+    """Generates, renames and upscales images for the given prompts"""
 
     # Create a directory for the images
     directory = os.path.join("books", topic, "images")
@@ -57,14 +67,26 @@ def make_images(prompts: list[str], topic: str) -> None:
         end_time = time.time()
         duration = end_time - start_time
         print(f"Time taken to generate image: {duration:.2f} seconds")
+        
+        # Rename the image
         image_name = shorten_image_name(prompt)
-        image.save(f"./books/{topic}/images/{image_name}.jpeg")
+        image_path = f"./books/{topic}/images/{image_name}.jpeg"
+        
+        # Upscale the image and save over the original
+        try:
+            upscaled_image = upscale.process_pil(image)
+            upscaled_image.save(image_path, quality=60)
+        except Exception as e:
+            print(f"Error in upscaling image: {e}")
+            # If upscaling fails, save the original image
+            image.save(image_path)
     
     print(f"\nImages saved to ./books/{topic}/images")
 
 
+
 def shorten_image_name(image_name: str) -> str:
-    """Shorten the image name using gemini"""
+    """Shorten the image name using LLM"""
     template = ChatPromptTemplate([
         ("system", IMAGE_RENAME_SYSTEM_PROMPT),
         ("human", "Filename: {image_name}")

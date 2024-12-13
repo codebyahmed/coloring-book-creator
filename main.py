@@ -11,7 +11,7 @@ def make_books(topic: str) -> None:
     # Generate prompts for the given topic
     prompts = make_prompts(topic)
 
-    # Generate images for the given prompts (Also renames the images)
+    # Generate images for the given prompts (Also renames and upscales the images)
     make_images(prompts, topic)
 
 

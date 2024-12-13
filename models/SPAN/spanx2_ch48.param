@@ -1,0 +1,79 @@
+7767517
+77 92
+Input                    input.1                    0 1 data
+MemoryData               /Constant_output_0       0 1 /Constant_output_0 0=1 1=1 2=3
+BinaryOp                 /Sub                     2 1 data /Constant_output_0 /Sub_output_0 0=1
+BinaryOp                 /Mul                     1 1 /Sub_output_0 /Mul_output_0 0=2 1=1 2=2.550000e+02
+Convolution              /conv_1/eval_conv/Conv   1 1 /Mul_output_0 /conv_1/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=1296
+Split                    splitncnn_0              1 3 /conv_1/eval_conv/Conv_output_0 /conv_1/eval_conv/Conv_output_0_splitncnn_0 /conv_1/eval_conv/Conv_output_0_splitncnn_1 /conv_1/eval_conv/Conv_output_0_splitncnn_2
+Convolution              /block_1/c1_r/eval_conv/Conv 1 1 /conv_1/eval_conv/Conv_output_0_splitncnn_2 /block_1/c1_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_1/act1/Mul        1 1 /block_1/c1_r/eval_conv/Conv_output_0 /block_1/act1/Mul_output_0
+Convolution              /block_1/c2_r/eval_conv/Conv 1 1 /block_1/act1/Mul_output_0 /block_1/c2_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_1/act1_1/Mul      1 1 /block_1/c2_r/eval_conv/Conv_output_0 /block_1/act1_1/Mul_output_0
+Convolution              /block_1/c3_r/eval_conv/Conv 1 1 /block_1/act1_1/Mul_output_0 /block_1/c3_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Split                    splitncnn_1              1 2 /block_1/c3_r/eval_conv/Conv_output_0 /block_1/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_1/c3_r/eval_conv/Conv_output_0_splitncnn_1
+Sigmoid                  /block_1/Sigmoid         1 1 /block_1/c3_r/eval_conv/Conv_output_0_splitncnn_1 /block_1/Sigmoid_output_0
+BinaryOp                 /block_1/Sub             1 1 /block_1/Sigmoid_output_0 /block_1/Sub_output_0 0=1 1=1 2=5.000000e-01
+BinaryOp                 /block_1/Add             2 1 /block_1/c3_r/eval_conv/Conv_output_0_splitncnn_0 /conv_1/eval_conv/Conv_output_0_splitncnn_1 /block_1/Add_output_0
+BinaryOp                 /block_1/Mul             2 1 /block_1/Add_output_0 /block_1/Sub_output_0 /block_1/Mul_output_0 0=2
+Split                    splitncnn_2              1 3 /block_1/Mul_output_0 /block_1/Mul_output_0_splitncnn_0 /block_1/Mul_output_0_splitncnn_1 /block_1/Mul_output_0_splitncnn_2
+Convolution              /block_2/c1_r/eval_conv/Conv 1 1 /block_1/Mul_output_0_splitncnn_2 /block_2/c1_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_2/act1/Mul        1 1 /block_2/c1_r/eval_conv/Conv_output_0 /block_2/act1/Mul_output_0
+Convolution              /block_2/c2_r/eval_conv/Conv 1 1 /block_2/act1/Mul_output_0 /block_2/c2_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_2/act1_1/Mul      1 1 /block_2/c2_r/eval_conv/Conv_output_0 /block_2/act1_1/Mul_output_0
+Convolution              /block_2/c3_r/eval_conv/Conv 1 1 /block_2/act1_1/Mul_output_0 /block_2/c3_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Split                    splitncnn_3              1 2 /block_2/c3_r/eval_conv/Conv_output_0 /block_2/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_2/c3_r/eval_conv/Conv_output_0_splitncnn_1
+Sigmoid                  /block_2/Sigmoid         1 1 /block_2/c3_r/eval_conv/Conv_output_0_splitncnn_1 /block_2/Sigmoid_output_0
+BinaryOp                 /block_2/Sub             1 1 /block_2/Sigmoid_output_0 /block_2/Sub_output_0 0=1 1=1 2=5.000000e-01
+BinaryOp                 /block_2/Add             2 1 /block_2/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_1/Mul_output_0_splitncnn_1 /block_2/Add_output_0
+BinaryOp                 /block_2/Mul             2 1 /block_2/Add_output_0 /block_2/Sub_output_0 /block_2/Mul_output_0 0=2
+Split                    splitncnn_4              1 2 /block_2/Mul_output_0 /block_2/Mul_output_0_splitncnn_0 /block_2/Mul_output_0_splitncnn_1
+Convolution              /block_3/c1_r/eval_conv/Conv 1 1 /block_2/Mul_output_0_splitncnn_1 /block_3/c1_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_3/act1/Mul        1 1 /block_3/c1_r/eval_conv/Conv_output_0 /block_3/act1/Mul_output_0
+Convolution              /block_3/c2_r/eval_conv/Conv 1 1 /block_3/act1/Mul_output_0 /block_3/c2_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_3/act1_1/Mul      1 1 /block_3/c2_r/eval_conv/Conv_output_0 /block_3/act1_1/Mul_output_0
+Convolution              /block_3/c3_r/eval_conv/Conv 1 1 /block_3/act1_1/Mul_output_0 /block_3/c3_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Split                    splitncnn_5              1 2 /block_3/c3_r/eval_conv/Conv_output_0 /block_3/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_3/c3_r/eval_conv/Conv_output_0_splitncnn_1
+Sigmoid                  /block_3/Sigmoid         1 1 /block_3/c3_r/eval_conv/Conv_output_0_splitncnn_1 /block_3/Sigmoid_output_0
+BinaryOp                 /block_3/Sub             1 1 /block_3/Sigmoid_output_0 /block_3/Sub_output_0 0=1 1=1 2=5.000000e-01
+BinaryOp                 /block_3/Add             2 1 /block_3/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_2/Mul_output_0_splitncnn_0 /block_3/Add_output_0
+BinaryOp                 /block_3/Mul             2 1 /block_3/Add_output_0 /block_3/Sub_output_0 /block_3/Mul_output_0 0=2
+Split                    splitncnn_6              1 2 /block_3/Mul_output_0 /block_3/Mul_output_0_splitncnn_0 /block_3/Mul_output_0_splitncnn_1
+Convolution              /block_4/c1_r/eval_conv/Conv 1 1 /block_3/Mul_output_0_splitncnn_1 /block_4/c1_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_4/act1/Mul        1 1 /block_4/c1_r/eval_conv/Conv_output_0 /block_4/act1/Mul_output_0
+Convolution              /block_4/c2_r/eval_conv/Conv 1 1 /block_4/act1/Mul_output_0 /block_4/c2_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_4/act1_1/Mul      1 1 /block_4/c2_r/eval_conv/Conv_output_0 /block_4/act1_1/Mul_output_0
+Convolution              /block_4/c3_r/eval_conv/Conv 1 1 /block_4/act1_1/Mul_output_0 /block_4/c3_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Split                    splitncnn_7              1 2 /block_4/c3_r/eval_conv/Conv_output_0 /block_4/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_4/c3_r/eval_conv/Conv_output_0_splitncnn_1
+Sigmoid                  /block_4/Sigmoid         1 1 /block_4/c3_r/eval_conv/Conv_output_0_splitncnn_1 /block_4/Sigmoid_output_0
+BinaryOp                 /block_4/Sub             1 1 /block_4/Sigmoid_output_0 /block_4/Sub_output_0 0=1 1=1 2=5.000000e-01
+BinaryOp                 /block_4/Add             2 1 /block_4/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_3/Mul_output_0_splitncnn_0 /block_4/Add_output_0
+BinaryOp                 /block_4/Mul             2 1 /block_4/Add_output_0 /block_4/Sub_output_0 /block_4/Mul_output_0 0=2
+Split                    splitncnn_8              1 2 /block_4/Mul_output_0 /block_4/Mul_output_0_splitncnn_0 /block_4/Mul_output_0_splitncnn_1
+Convolution              /block_5/c1_r/eval_conv/Conv 1 1 /block_4/Mul_output_0_splitncnn_1 /block_5/c1_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_5/act1/Mul        1 1 /block_5/c1_r/eval_conv/Conv_output_0 /block_5/act1/Mul_output_0
+Convolution              /block_5/c2_r/eval_conv/Conv 1 1 /block_5/act1/Mul_output_0 /block_5/c2_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_5/act1_1/Mul      1 1 /block_5/c2_r/eval_conv/Conv_output_0 /block_5/act1_1/Mul_output_0
+Convolution              /block_5/c3_r/eval_conv/Conv 1 1 /block_5/act1_1/Mul_output_0 /block_5/c3_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Split                    splitncnn_9              1 2 /block_5/c3_r/eval_conv/Conv_output_0 /block_5/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_5/c3_r/eval_conv/Conv_output_0_splitncnn_1
+Sigmoid                  /block_5/Sigmoid         1 1 /block_5/c3_r/eval_conv/Conv_output_0_splitncnn_1 /block_5/Sigmoid_output_0
+BinaryOp                 /block_5/Sub             1 1 /block_5/Sigmoid_output_0 /block_5/Sub_output_0 0=1 1=1 2=5.000000e-01
+BinaryOp                 /block_5/Add             2 1 /block_5/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_4/Mul_output_0_splitncnn_0 /block_5/Add_output_0
+BinaryOp                 /block_5/Mul             2 1 /block_5/Add_output_0 /block_5/Sub_output_0 /block_5/Mul_output_0 0=2
+Split                    splitncnn_10             1 2 /block_5/Mul_output_0 /block_5/Mul_output_0_splitncnn_0 /block_5/Mul_output_0_splitncnn_1
+Convolution              /block_6/c1_r/eval_conv/Conv 1 1 /block_5/Mul_output_0_splitncnn_1 /block_6/c1_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_6/act1/Mul        1 1 /block_6/c1_r/eval_conv/Conv_output_0 /block_6/act1/Mul_output_0
+Split                    splitncnn_11             1 2 /block_6/act1/Mul_output_0 /block_6/act1/Mul_output_0_splitncnn_0 /block_6/act1/Mul_output_0_splitncnn_1
+Convolution              /block_6/c2_r/eval_conv/Conv 1 1 /block_6/act1/Mul_output_0_splitncnn_1 /block_6/c2_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Swish                    /block_6/act1_1/Mul      1 1 /block_6/c2_r/eval_conv/Conv_output_0 /block_6/act1_1/Mul_output_0
+Convolution              /block_6/c3_r/eval_conv/Conv 1 1 /block_6/act1_1/Mul_output_0 /block_6/c3_r/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Split                    splitncnn_12             1 2 /block_6/c3_r/eval_conv/Conv_output_0 /block_6/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_6/c3_r/eval_conv/Conv_output_0_splitncnn_1
+Sigmoid                  /block_6/Sigmoid         1 1 /block_6/c3_r/eval_conv/Conv_output_0_splitncnn_1 /block_6/Sigmoid_output_0
+BinaryOp                 /block_6/Sub             1 1 /block_6/Sigmoid_output_0 /block_6/Sub_output_0 0=1 1=1 2=5.000000e-01
+BinaryOp                 /block_6/Add             2 1 /block_6/c3_r/eval_conv/Conv_output_0_splitncnn_0 /block_5/Mul_output_0_splitncnn_0 /block_6/Add_output_0
+BinaryOp                 /block_6/Mul             2 1 /block_6/Add_output_0 /block_6/Sub_output_0 /block_6/Mul_output_0 0=2
+Convolution              /conv_2/eval_conv/Conv   1 1 /block_6/Mul_output_0 /conv_2/eval_conv/Conv_output_0 0=48 1=3 4=1 5=1 6=20736
+Concat                   /Concat                  4 1 /conv_1/eval_conv/Conv_output_0_splitncnn_0 /conv_2/eval_conv/Conv_output_0 /block_1/Mul_output_0_splitncnn_0 /block_6/act1/Mul_output_0_splitncnn_0 /Concat_output_0
+Convolution              /conv_cat/Conv           1 1 /Concat_output_0 /conv_cat/Conv_output_0 0=48 1=1 5=1 6=9216
+Convolution              /upsampler/upsampler.0/Conv 1 1 /conv_cat/Conv_output_0 /upsampler/upsampler.0/Conv_output_0 0=12 1=3 4=1 5=1 6=5184
+PixelShuffle             /upsampler/upsampler.1/DepthToSpace 1 1 /upsampler/upsampler.0/Conv_output_0 output 0=2
