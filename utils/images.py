@@ -74,8 +74,12 @@ def make_images(prompts: list[str], topic: str) -> None:
         
         # Upscale the image and save over the original
         try:
+            start_time = time.time()
             upscaled_image = upscale.process_pil(image)
             upscaled_image.save(image_path, quality=60)
+            end_time = time.time()
+            duration = end_time - start_time
+            print(f"Time taken to upscale image: {duration:.2f} seconds")
         except Exception as e:
             print(f"Error in upscaling image: {e}")
             # If upscaling fails, save the original image
@@ -112,7 +116,7 @@ def shorten_image_name(image_name: str) -> str:
         shortened_name = shortened_name[:-1]
     end_time = time.time()
     duration = end_time - start_time
-    print(f"Time taken to name image: {duration:.2f} seconds")
+    print(f"Time taken to rename image: {duration:.2f} seconds")
     return shortened_name
 
 
