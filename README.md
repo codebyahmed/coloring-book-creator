@@ -24,10 +24,10 @@ Effortlessly generate unique, child-friendly coloring book pages on any topic yo
     ```
 
 4. **Set up environment variables:**
-    - Create a `.env` file in the root directory.
-    - Add your Hugging Face API token:
+    - Create a [.env](http://_vscodecontentref_/0) file in the root directory.
+    - Add your Nebius API key:
         ```
-        HF_TOKEN=your_hugging_face_api_token
+        NEBIUS_API_KEY=your_nebius_api_key
         ```
     - Add your OpenAI API token:
         ```
@@ -45,7 +45,7 @@ Effortlessly generate unique, child-friendly coloring book pages on any topic yo
 
 ## Technologies Used
 
-- **Flux1 dev** from Hugging Face for creating images.
+- **Flux Schnell** from Nebius API for creating images.
 - **OpenAI** for generating categories and prompts for images.
 - **LangChain** for integrating with OpenAI (can easily switch to Gemini if needed).
 - **SPAN** for upscaling the images by 2x.

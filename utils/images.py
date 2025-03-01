@@ -3,6 +3,7 @@ import io
 import requests
 import time
 import pathlib
+import base64
 from PIL import Image
 from dotenv import load_dotenv
 from upscale_ncnn_py import UPSCALE
@@ -14,10 +15,14 @@ load_dotenv()
 # Initialize the LLM model for renaming images
 llm = ChatOpenAI(model="gpt-4o-mini") #ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 
-# Load the Hugging Face API token for image generation
-HF_TOKEN = os.getenv("HF_TOKEN")
-API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"
-headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+# Load the Nebius API token for image generation
+NEBIUS_API_KEY = os.getenv("NEBIUS_API_KEY")
+NEBIUS_API_URL = "https://api.studio.nebius.com/v1/images/generations"
+NEBIUS_HEADERS = {
+    "Content-Type": "application/json",
+    "Accept": "*/*",
+    "Authorization": f"Bearer {NEBIUS_API_KEY}"
+}
 
 # Initialize the UPSCALE object for upscaling
 param_path = "models/SPAN/spanx2_ch48.param"
@@ -27,17 +32,28 @@ upscale._load(param_path=pathlib.Path(param_path), model_path=pathlib.Path(model
 
 
 def query(prompt: str) -> bytes:
-    """Query the API to generate an image for the given prompt"""
+    """Query the Nebius API to generate an image for the given prompt"""
     payload = {
-        "inputs": prompt,
-        "parameters": {
-            "width": 832,
-            "height": 1152,
-            "num_inference_steps": 50,
-        },
+        "model": "black-forest-labs/flux-schnell",
+        "response_format": "b64_json",
+        "response_extension": "jpg",
+        "width": 832,
+        "height": 1152,
+        "num_inference_steps": 16,
+        "negative_prompt": "",
+        "seed": -1,
+        "prompt": prompt
     }
-    response = requests.post(API_URL, headers=headers, json=payload, timeout=240)
-    return response.content
+    response = requests.post(NEBIUS_API_URL, headers=NEBIUS_HEADERS, json=payload, timeout=240)
+    response_json = response.json()
+    
+    # Extract the base64 image data from response and decode
+    if "data" in response_json and len(response_json["data"]) > 0:
+        if "b64_json" in response_json["data"][0]:
+            image_data = base64.b64decode(response_json["data"][0]["b64_json"])
+            return image_data
+    
+    raise Exception(f"Failed to get image data from response: {response_json}")
 
 
 def make_images(prompts: list[str], topic: str) -> None:
