@@ -34,12 +34,12 @@ upscale._load(param_path=pathlib.Path(param_path), model_path=pathlib.Path(model
 def query(prompt: str) -> bytes:
     """Query the Nebius API to generate an image for the given prompt"""
     payload = {
-        "model": "black-forest-labs/flux-schnell",
+        "model": "black-forest-labs/flux-dev",
         "response_format": "b64_json",
         "response_extension": "jpg",
         "width": 832,
         "height": 1152,
-        "num_inference_steps": 16,
+        "num_inference_steps": 50,
         "negative_prompt": "",
         "seed": -1,
         "prompt": prompt
